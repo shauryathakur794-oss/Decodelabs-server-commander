@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Welcome to DecodeLabs</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #ffffff;
+            background:
+                radial-gradient(circle at 50% 45%, rgba(9, 76, 170, 0.25), transparent 40%),
+                linear-gradient(135deg, #021331 0%, #041c49 52%, #061d46 100%);
+            overflow-x: hidden;
+        }
+
+        /* Decorative cloud on left */
+        body::before {
+            content: "";
+            position: fixed;
+            width: 260px;
+            height: 260px;
+            left: -85px;
+            top: 95px;
+            background:
+                radial-gradient(circle at 60% 60%, rgba(5, 75, 167, 0.42), transparent 57%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* Decorative cloud on bottom-right */
+        body::after {
+            content: "";
+            position: fixed;
+            width: 280px;
+            height: 280px;
+            right: -100px;
+            bottom: -80px;
+            background:
+                radial-gradient(circle at 40% 40%, rgba(5, 82, 182, 0.40), transparent 58%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .page {
+            min-height: 100vh;
+            width: 100%;
+            padding: 47px 7.5% 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ---------------- LOGO ---------------- */
+
+        .logo-area {
+            text-align: center;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 43px;
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: -1.3px;
+        }
+
+        .logo-icon {
+            width: 60px;
+            height: 47px;
+            border-radius: 50% 50% 45% 45%;
+            background: linear-gradient(145deg, #2eaefa, #1294ef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 18px rgba(25, 165, 249, 0.18);
+        }
+
+        .logo-icon::before {
+            content: "";
+            position: absolute;
+            width: 24px;
+            height: 19px;
+            border: 3px solid #082456;
+            border-radius: 4px;
+            border-top-color: transparent;
+            border-left-color: transparent;
+            transform: rotate(-10deg);
+            opacity: 0.95;
+        }
+
+        .logo-icon::after {
+            content: "☁";
+            color: #ffffff;
+            font-size: 24px;
+            position: absolute;
+            top: 9px;
+            left: 18px;
+        }
+
+        .decode {
+            color: #f4f4f5;
+        }
+
+        .labs {
+            color: #18a8f4;
+        }
+
+        .tagline {
+            margin-top: 15px;
+            font-size: 20px;
+            color: #bdd0e9;
+            letter-spacing: 0.2px;
+        }
+
+        /* ---------------- HERO ---------------- */
+
+        .hero {
+            text-align: center;
+            margin-top: 47px;
+        }
+
+        .hero h1 {
+            font-size: 65px;
+            line-height: 1.05;
+            font-weight: 700;
+            letter-spacing: -2.4px;
+            margin-bottom: 19px;
+        }
+
+        .hero h1 .welcome {
+            color: #f5f5f6;
+        }
+
+        .hero h1 .decode-text {
+            color: #13a4f3;
+        }
+
+        .hero h2 {
+            font-size: 31px;
+            font-weight: 700;
+            color: #cae0f7;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .description {
+            max-width: 850px;
+            margin: 0 auto;
+            color: #d1ddeb;
+            font-size: 20px;
+            line-height: 1.48;
+        }
+
+        /* ---------------- CARDS ---------------- */
+
+        .cards {
+            width: 100%;
+            margin-top: 31px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            height: 176px;
+            padding: 24px 15px 20px;
+            border-radius: 17px;
+            border: 1px solid rgba(26, 144, 241, 0.7);
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(9, 68, 147, 0.72),
+                    rgba(4, 39, 91, 0.77)
+                );
+            box-shadow:
+                inset 0 1px 0 rgba(49, 149, 235, 0.12),
+                0 8px 25px rgba(0, 0, 0, 0.12);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: flex-start;
+        }
+
+        .card-icon {
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 7px;
+        }
+
+        .card-icon svg {
+            width: 51px;
+            height: 51px;
+        }
+
+        .linux-icon {
+            font-size: 47px;
+            line-height: 1;
+        }
+
+        .card h3 {
+            font-size: 21px;
+            color: #f5f7fa;
+            margin-bottom: 9px;
+            font-weight: 700;
+        }
+
+        .card p {
+            color: #b9d3ef;
+            font-size: 16px;
+            line-height: 1.35;
+            max-width: 220px;
+        }
+
+        /* ---------------- INFO SECTION ---------------- */
+
+        .info-line {
+            height: 1px;
+            width: 100%;
+            margin-top: 37px;
+            background: rgba(29, 118, 211, 0.38);
+        }
+
+        .info {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            margin-top: 25px;
+        }
+
+        .info-box {
+            min-height: 72px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            gap: 16px;
+            padding: 0 24px;
+        }
+
+        .info-box + .info-box {
+            border-left: 1px solid rgba(29, 118, 211, 0.27);
+        }
+
+        .info-icon {
+            width: 40px;
+            flex-shrink: 0;
+            color: #62bafa;
+            font-size: 34px;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .info-content {
+            text-align: left;
+        }
+
+        .info-content .main {
+            color: #dbe8f6;
+            font-size: 17px;
+            line-height: 1.4;
+            white-space: nowrap;
+        }
+
+        .info-content .sub {
+            color: #a9bfda;
+            font-size: 15px;
+            margin-top: 4px;
+        }
+
+        /* ---------------- FOOTER ---------------- */
+
+        .footer {
+            text-align: center;
+            margin-top: 29px;
+            font-size: 14px;
+            color: #809ab9;
+        }
+
+        /* ---------------- RESPONSIVE ---------------- */
+
+        @media (max-width: 1100px) {
+
+            .page {
+                padding-left: 5%;
+                padding-right: 5%;
+            }
+
+            .hero h1 {
+                font-size: 54px;
+            }
+
+            .cards {
+                gap: 15px;
+            }
+
+            .card {
+                height: 175px;
+            }
+
+            .info-content .main {
+                white-space: normal;
+            }
+        }
+
+        @media (max-width: 800px) {
+
+            .page {
+                padding-top: 35px;
+            }
+
+            .logo {
+                font-size: 34px;
+            }
+
+            .tagline {
+                font-size: 17px;
+            }
+
+            .hero {
+                margin-top: 36px;
+            }
+
+            .hero h1 {
+                font-size: 42px;
+                letter-spacing: -1px;
+            }
+
+            .hero h2 {
+                font-size: 25px;
+            }
+
+            .description {
+                font-size: 17px;
+            }
+
+            .cards {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .info {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .info-box {
+                justify-content: flex-start;
+            }
+
+            .info-box + .info-box {
+                border-left: none;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .page {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .logo {
+                font-size: 29px;
+            }
+
+            .logo-icon {
+                width: 47px;
+                height: 38px;
+            }
+
+            .tagline {
+                font-size: 15px;
+            }
+
+            .hero h1 {
+                font-size: 33px;
+            }
+
+            .hero h2 {
+                font-size: 21px;
+            }
+
+            .description {
+                font-size: 15px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="page">
+
+        <!-- LOGO -->
+        <div class="logo-area">
+
+            <div class="logo">
+                <div class="logo-icon"></div>
+
+                <div>
+                    <span class="decode">Decode</span><span class="labs">Labs</span>
+                </div>
+            </div>
+
+            <div class="tagline">
+                Cloud Computing | AWS / Azure
+            </div>
+
+        </div>
+
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <h1>
+                <span class="welcome">Welcome to </span>
+                <span class="decode-text">DecodeLabs!</span>
+            </h1>
+
+            <h2>
+                The Server Commander
+            </h2>
+
+            <p class="description">
+                This website is deployed on a cloud-based virtual server as part of
+                Cloud Computing Project 2. A custom web server successfully deployed
+                on AWS EC2.
+            </p>
+
+        </section>
+
+
+        <!-- CARDS -->
+        <section class="cards">
+
+            <!-- CLOUD -->
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <svg viewBox="0 0 100 80" fill="none"
+                         xmlns="http://www.w3.org/2000/svg">
+
+                        <path
+                            d="M31 65H71C84 65 91 57 91 47C91 37 83 29 73 29C70 17 60 10 48 10C34 10 23 20 21 33C11 35 5 43 5 52C5 60 14 65 31 65Z"
+                            fill="#62C1F5"
+                        />
+
+                        <path
+                            d="M30 64H70C82 64 89 57 89 47"
+                            stroke="#8ED7FA"
+                            stroke-width="2"
+                            opacity="0.8"
+                        />
+
+                    </svg>
+
+                </div>
+
+                <h3>Cloud</h3>
+
+                <p>AWS EC2 / Azure Virtual<br>Machine</p>
+
+            </div>
+
+
+            <!-- LINUX -->
+            <div class="card">
+
+                <div class="card-icon linux-icon">
+                    🐧
+                </div>
+
+                <h3>Linux</h3>
+
+                <p>Linux server environment</p>
+
+            </div>
+
+
+            <!-- WEB SERVER -->
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <svg viewBox="0 0 100 80"
+                         xmlns="http://www.w3.org/2000/svg">
+
+                        <rect x="17" y="8"
+                              width="66" height="18"
+                              rx="4"
+                              fill="#26B7F1"/>
+
+                        <rect x="17" y="31"
+                              width="66" height="18"
+                              rx="4"
+                              fill="#279EEA"/>
+
+                        <rect x="17" y="54"
+                              width="66" height="18"
+                              rx="4"
+                              fill="#1885D5"/>
+
+                        <circle cx="29" cy="17" r="2"
+                                fill="#DDF7FF"/>
+
+                        <circle cx="29" cy="40" r="2"
+                                fill="#DDF7FF"/>
+
+                        <circle cx="29" cy="63" r="2"
+                                fill="#DDF7FF"/>
+
+                        <line x1="37" y1="17"
+                              x2="57" y2="17"
+                              stroke="#DDF7FF"
+                              stroke-width="2"/>
+
+                        <line x1="37" y1="40"
+                              x2="57" y2="40"
+                              stroke="#DDF7FF"
+                              stroke-width="2"/>
+
+                        <line x1="37" y1="63"
+                              x2="57" y2="63"
+                              stroke="#DDF7FF"
+                              stroke-width="2"/>
+
+                    </svg>
+
+                </div>
+
+                <h3>Web Server</h3>
+
+                <p>Apache / Nginx<br>configuration</p>
+
+            </div>
+
+
+            <!-- SECURE ACCESS -->
+            <div class="card">
+
+                <div class="card-icon">
+
+                    <svg viewBox="0 0 100 100"
+                         xmlns="http://www.w3.org/2000/svg">
+
+                        <path
+                            d="M50 7L84 20V45C84 67 69 84 50 92C31 84 16 67 16 45V20L50 7Z"
+                            fill="#8A54E8"
+                        />
+
+                        <rect x="33" y="43"
+                              width="34" height="26"
+                              rx="5"
+                              fill="#6B40C4"/>
+
+                        <path
+                            d="M39 43V35C39 27 45 22 50 22C56 22 62 27 62 35V43"
+                            fill="none"
+                            stroke="#E8DFFF"
+                            stroke-width="7"
+                            stroke-linecap="round"
+                        />
+
+                        <circle cx="50" cy="55"
+                                r="4"
+                                fill="#F4ECFF"/>
+
+                        <rect x="48" y="58"
+                              width="4"
+                              height="7"
+                              rx="2"
+                              fill="#F4ECFF"/>
+
+                    </svg>
+
+                </div>
+
+                <h3>Secure Access</h3>
+
+                <p>SSH based server management</p>
+
+            </div>
+
+        </section>
+
+
+        <!-- DIVIDER -->
+        <div class="info-line"></div>
+
+
+        <!-- PROJECT DETAILS -->
+        <section class="info">
+
+            <div class="info-box">
+
+                <div class="info-icon">🎓</div>
+
+                <div class="info-content">
+
+                    <div class="main">
+                        Project: Cloud Computing – Project 2
+                    </div>
+
+                    <div class="sub">
+                        The Server Commander
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-icon">👤</div>
+
+                <div class="info-content">
+
+                    <div class="main">
+                        Role: Cloud Infrastructure Engineer
+                    </div>
+
+                    <div class="sub">
+                        (Intern)
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <div class="info-icon">☁</div>
+
+                <div class="info-content">
+
+                    <div class="main">
+                        Hosted On: AWS EC2
+                    </div>
+
+                    <div class="sub">
+                        Linux (Ubuntu)
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <div class="footer">
+            © 2026 DecodeLabs | Cloud Infrastructure Project
+        </div>
+
+    </div>
+
+</body>
+</html>
